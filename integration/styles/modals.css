@@ -1,0 +1,235 @@
+/* Regroupe l'ensemble des styles pour les boites modales */
+
+/* ----- Modale du menu mobile ----- */
+.menu_mobile {
+    display: none;
+    background-color: #f3f3f3;
+    position: absolute;
+    width: 100%;
+    min-height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
+.menu_mobile_block_image {
+    margin: 1rem;
+    top: 2rem;
+    display: none;
+}
+.menu_mobile_title {
+    text-transform: uppercase;
+    color: var(--font-title-color);
+    font-size: var(--font-big-size);
+    margin: 1.5rem;
+    font-weight: var(--font-title-weight);
+}
+.navigation_mobile {
+    width: 60%;
+}
+.navigation_mobile_link {
+    font-size: var(--font-subtitle-size);
+    transition: var(--main-transition-timing);
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); 
+}
+.navigation_mobile_link:hover {
+    color: var(--font-link-hover-color);
+}
+.navigation_mobile_portfolio {
+    margin-bottom: .2rem;
+}
+.navigation_mobile_portfolio:hover {
+    color: var(--font-main-color);
+    cursor: default;  
+}
+.navigation_mobile__categories {
+    display: flex;
+    flex-direction: column;
+}
+.navigation_mobile__categories .navigation_mobile_link {
+    margin: .5rem;
+}
+.menu_mobile_segment {
+    height: 2px;
+    background-color: var(--font-title-color);
+    margin: 0rem .5rem;
+}
+.translateToTop {
+    animation-name: translateToTop;
+    animation-delay: 0;
+    animation-duration: .4s;
+    animation-iteration-count: 1;
+}
+@keyframes translateToTop {
+    0% {
+      transform: translateY(0%);
+      opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+      transform: translateY(-20%);   
+    }
+}
+.translateFromTop {
+    animation-name: translateFromTop;
+    animation-delay: 0;
+    animation-duration: .5s;
+    animation-iteration-count: 1;
+}
+@keyframes translateFromTop {
+    0% {
+      transform: translateY(-20%);
+      opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+      transform: translateY(0%);   
+    }
+}
+/* ----- Modale du menu mobile ----- */
+
+/* ----- Modale du slider d'image ----- */
+.slider_image {
+    transition: var(--semi-long-transition-timing);
+    z-index: -1;
+    opacity: 0;
+    display: flex;
+    background-color: #000;
+    position: absolute;
+    width: 100%;
+    min-height: 100vh;
+    top: 0;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */  
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.slider_image_main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.slider_image_footer {
+    width: 70%;
+}
+.slider_image_close_button {
+    position: absolute;
+    top: .6rem;
+    right: .6rem;
+}
+.slider_image_left_arrow, .slider_image_right_arrow {
+    width: 15%;
+    display: flex;
+    justify-content: center;  
+}
+.slider_image_block_img {
+
+}
+.slider_image_block_img img {
+    width: 100%;
+    max-height: 500px;
+}
+.slider_image svg {
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    fill: #fff;
+    transition: var(--main-transition-timing);
+}
+.slider_image_close_button  {
+    width: 40px;
+    height: 40px;
+}
+.slider_image svg:hover {
+    fill: var(--font-link-hover-color);
+}
+.slider_image_description, .slider_image_date, .slider_image_name {
+    margin: .5rem 0;
+    color: #fff;
+    text-align: center;
+}
+/* start animations slider */
+.leavingTranslationToLeft {
+    animation-name: leavingTranslationToLeft;
+    animation-duration: .4s;
+    animation-iteration-count: 1;
+}
+.leavingTranslationToRight {
+    animation-name: leavingTranslationToRight;
+    animation-duration: .4s;
+    animation-iteration-count: 1;
+}
+.arrivingTranslationFromLeft {
+    animation-name: arrivingTranslationFromLeft;
+    animation-duration: .4s;
+    animation-iteration-count: 1;
+}
+.arrivingTranslationFromRight {
+    animation-name: arrivingTranslationFromRight;
+    animation-duration: .4s;
+    animation-iteration-count: 1;
+}
+@keyframes leavingTranslationToLeft {
+    0% {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+    70% {
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(-100%);   
+    }
+}
+@keyframes leavingTranslationToRight {
+    0% {
+        transform: translateX(0%);
+        opacity: 1;
+        }
+        70% {
+            opacity: 0;
+        }
+        100% {
+        transform: translateX(100%);   
+        }
+}
+@keyframes arrivingTranslationFromLeft {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+        }
+        70% {
+            opacity: 1;
+        }
+        100% {
+        transform: translateX(0%);   
+        }
+}
+@keyframes arrivingTranslationFromRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+        }
+        70% {
+            opacity: 1;
+        }
+        100% {
+        transform: translateX(0%);   
+        }
+}
+/* end animation slider */
+/* ----- Modale du slider d'image ----- */

@@ -1,0 +1,57 @@
+:root {
+
+    /* ----- colors ----- */
+    --svg-main-color: #002631;
+    --border-main-color: lightgrey;
+    --application-border-color: #006e8fb2;
+    --font-link-color: #00303f;
+    --font-main-color: #00303f;
+
+    --font-link-hover-color: #F18F01;
+    --orange-darker-color: #cc7a00;
+    --font-title-color: #006E90;
+    --font-base-color: #00303f;
+
+    --button-light-color: #fff;
+    --button-dark-color: #00303f;
+    --button-background-logout-color: #fac629;
+    --button-background-link-color: #1c77ff;
+    --button-background-hover-color: #fff;
+    --button-background-submit-color: #1d975e;
+    --button-background-delete-color: #e14e5c;
+    /* ----- colors ----- */
+
+
+    /* ----- font size ----- */
+    --font-base-size: 1.5rem;
+    --font-title-size: 2rem;
+    --font-big-size: 3rem;
+    --font-subtitle-size: 1.5rem;
+    --font-copyright-size: .8rem;
+    /* ----- font size ----- */
+
+
+    /* ----- font weight ----- */
+    --font-base-weight: 500;
+    --font-title-weight: 600;
+    --font-subtitle-weight: 600;
+    /* ----- font weight ----- */
+
+
+    /* ----- transition timing ----- */
+    --main-transition-timing: .2s;
+    --short-transition-timing: .1s;
+    --semi-long-transition-timing: .3s;
+    --long-trnasition-timing: .4s;
+    /* ----- transition timing ----- */
+
+
+    /* ----- spacing ----- */
+    --text-margin: .3rem;
+    --title-margin: 0 0 2rem 0;
+    --subtitle-margin: 1rem 1rem 1rem 0;
+    --navigationlink-margin: .2rem;
+    /* ----- spacing ----- */
+}
+
+
