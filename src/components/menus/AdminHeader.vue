@@ -5,13 +5,12 @@
             <div class="navigation_block_image">
                 <img src="@/assets/images/bannière.png" alt="dessin faisant office de banière pour illustrer la navigation du site">
             </div>
-            <nav class="navigation">      
-                <a class="navigation_link" href="../frontoffice/accueil.html">Accueil</a>
-                <a class="navigation_link" href="./admin.html">Admin</a>
-                <a class="navigation_link" href="./work.html">Dessins</a>
-                <a class="navigation_link" href="./category.html">Catégories</a>
-                <a class="navigation_link" href="./faq.html">FAQ</a>
-                <a class="navigation_link" href="./login.html">Connexion</a>
+            <nav class="navigation">
+                <router-link class="navigation_link" to="/">Accueil</router-link>   
+                <router-link class="navigation_link" to="/backoffice/admin">Admin</router-link>   
+                <router-link class="navigation_link" to="/backoffice/oeuvres">Dessins</router-link>   
+                <router-link class="navigation_link" to="/backoffice/categories">Catégories</router-link>   
+                <router-link class="navigation_link" to="/backoffice/faq">FAQ</router-link>   
             </nav>
         </div>
     </header>

@@ -6,25 +6,29 @@ import * as backoffice from '@/views/backoffice';
 // déclaration des routes
 const routes = [
     {
-        // les routes publiques
+        // les routes du frontoffice
         path: '/',
         name: 'frontoffice',
         component: frontoffice.Layout,
         children: [
-            { path: '', name: 'home', component: backoffice.Home },
+            { path: '', name: 'home', component: frontoffice.Home },
             { path: 'portfolio/:category', name: 'portfolio', component: frontoffice.Portfolio },
-            { path: 'faq', name: 'faq', component: backoffice.Faq },
+            { path: 'faq', name: 'faq', component: frontoffice.Faq },
+            { path: 'backoffice/login', name: 'login', component: frontoffice.Login },
         ]
     },
 
     {
-        // les routes admin
+        // les routes du backoffice
         path: '/backoffice',
         name: 'backoffice',
         component: backoffice.Layout,
         children: [
-            { path: 'oeuvres', name: 'work', component: backoffice.Work },
+            { path: 'admin', name: 'admin', component: backoffice.Admin },
             { path: 'categories', name: 'category', component: backoffice.Category },
+            { path: 'oeuvres', name: 'work', component: backoffice.Work },
+            { path: 'faq', name: 'adminFaq', component: backoffice.Faq },
+
         ]
     },
     {

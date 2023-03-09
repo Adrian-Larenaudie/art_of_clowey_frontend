@@ -6,14 +6,14 @@
                 <img src="@/assets/images/bannière.png" alt="dessin faisant office de banière pour illustrer la navigation du site">
             </div>
             <nav class="navigation">
-                <a class="navigation_link" href="./accueil.html">Accueil</a>
+                <router-link class="navigation_link" to="/">Accueil</router-link>    
                 <p class="navigation_link" id="navigation_portfolio">Portfolio</p>
                 <div class="navigation__categories" id="navigation_wrapper">
-                    <a class="navigation_link" href="./portfolio.html">Digital</a>
-                    <a class="navigation_link" href="./portfolio.html">Traditionnel</a>
-                    <a class="navigation_link" href="./portfolio.html">Aquarelles</a>
+                    <router-link class="navigation_link" to="/categories/digital">Digital</router-link>
+                    <router-link class="navigation_link" to="/categories/tradi">Traditionnel</router-link>
+                    <router-link class="navigation_link" to="/categories/aquarelle">Aquarelles</router-link>
                 </div>
-                <a class="navigation_link" href="./faq.html">FAQ</a>
+                <router-link class="navigation_link" to="/faq">FAQ</router-link>
             </nav>
         </div>
     </header>

@@ -6,12 +6,11 @@
         </div>
         <h1 class="menu_mobile_title">Menu</h1>
         <nav class="navigation_mobile">
-            <a class="navigation_mobile_link mobile_link" href="../frontoffice/accueil.html">Accueil</a>
-            <a class="navigation_mobile_link mobile_link" href="./admin.html">Admin</a>
-            <a class="navigation_mobile_link mobile_link" href="./work.html">Dessins</a>
-            <a class="navigation_mobile_link mobile_link" href="./category.html">Catégories</a>
-            <a class="navigation_mobile_link mobile_link" href="./faq.html">FAQ</a>
-            <a class="navigation_mobile_link mobile_link" href="./login.html">Connexion</a>
+            <router-link class="navigation_mobile_link mobile_link" to="/">Accueil</router-link>   
+            <router-link class="navigation_mobile_link mobile_link" to="/backoffice/admin">Admin</router-link>   
+            <router-link class="navigation_mobile_link mobile_link" to="/backoffice/oeuvres">Dessins</router-link>   
+            <router-link class="navigation_mobile_link mobile_link" to="/backoffice/categories">Catégories</router-link>   
+            <router-link class="navigation_mobile_link mobile_link" to="/backoffice/faq">FAQ</router-link>  
         </nav>
     </div>
     <!-- Modale du menu mobile -->
@@ -19,6 +18,6 @@
 
 <script>
 export default {
-        name: 'ModalAdminMobileMenu',
-    };
+    name: 'ModalAdminMobileMenu',
+};
 </script>
