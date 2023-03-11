@@ -26,6 +26,7 @@ const routes = [
         children: [
             { path: 'admin', name: 'admin', component: backoffice.Admin },
             { path: 'categories', name: 'category', component: backoffice.Category },
+            { path: 'presentation', name: 'presentation', component: backoffice.Presentation },
             { path: 'oeuvres', name: 'work', component: backoffice.Work },
             { path: 'faq', name: 'adminFaq', component: backoffice.Faq },
 

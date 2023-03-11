@@ -9,7 +9,8 @@
             <router-link class="navigation_mobile_link mobile_link" to="/">Accueil</router-link>   
             <router-link class="navigation_mobile_link mobile_link" to="/backoffice/admin">Admin</router-link>   
             <router-link class="navigation_mobile_link mobile_link" to="/backoffice/oeuvres">Dessins</router-link>   
-            <router-link class="navigation_mobile_link mobile_link" to="/backoffice/categories">Catégories</router-link>   
+            <router-link class="navigation_mobile_link mobile_link" to="/backoffice/categories">Catégories</router-link> 
+            <router-link class="navigation_mobile_link mobile_link" to="/backoffice/presentation">Présentation</router-link> 
             <router-link class="navigation_mobile_link mobile_link" to="/backoffice/faq">FAQ</router-link>  
         </nav>
     </div>

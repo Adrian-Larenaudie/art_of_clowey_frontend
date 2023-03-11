@@ -508,7 +508,8 @@ a {
     -o-transition: .3s ease;
     transition: .3s ease;
 }
-.questions:checked ~ .question .svg_question_arrow {
+.questions:checked ~ .question .svg_question_arrow,
+.questions:checked ~  .presentation_block_question .svg_question_arrow {
     fill: #006E90;
     -webkit-transform: rotate(90deg);
     -moz-transform: rotate(90deg);
@@ -659,7 +660,8 @@ a {
 .admin_title, 
 .category_title, 
 .backoffice_faq_title, 
-.work_title {
+.work_title,
+.backoffice_presentation_title {
     font-size: var(--font-subtitle-size);
     color: var(--font-title-color);
     text-align: center;
@@ -754,5 +756,64 @@ input:focus, select:focus, textarea:focus  {
     flex-wrap: wrap;
 }
 /* backoffice page login */
+
+/* backoffice page présentation */
+.presentation_block_manage_paragraphe .presentation_block_question {
+    margin: .5 0;
+    font-weight: 600;
+    padding: 0 0 0 1.5rem;
+    position: relative;
+    opacity: .9;
+    display: block;
+    cursor: pointer;
+}
+.presentation_answer_label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.delete_paragraphe_block svg * {
+    stroke: var(--button-background-delete-color); 
+}
+.delete_paragraphe_block svg {
+    transition: var(--semi-long-transition-timing);
+    cursor: pointer;
+}
+.delete_paragraphe_block svg:hover {
+    fill: var(--button-background-delete-color); 
+}
+.update_presentation_segment {
+    margin: 1.5rem 2rem 0 2rem;
+
+}
+.backoffice_presentation_block_image {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
+}
+.update_presentation_form {
+    width: 80%;
+}
+.backoffice_presentation_block_image div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.backoffice_presentation_block_image p {
+    display: block;
+    width: fit-content;
+}
+.presentation_submit_block {
+    display: flex;
+    justify-content: center;
+}
+.presentation_button {
+    height: fit-content;
+    margin: .5rem auto;
+}
+/* backoffice page présentation */
 
 /* FIN PAGES BACKOFFICE */
