@@ -2,7 +2,7 @@
     <!-- Menu de navigation tablette -->
     <div class="application_block_tablet_menu">
         <nav class="tablet_menu">
-            <router-link class="tablet_menu_link" to="/">Accueil</router-link>
+            <router-link class="tablet_menu_link" to="/">Front office</router-link>
             <router-link class="tablet_menu_link" to="/backoffice/admin">Admin</router-link>
             <router-link class="tablet_menu_link" to="/backoffice/oeuvres">Dessins</router-link>
             <router-link class="tablet_menu_link" to="/backoffice/categories">Catégories</router-link>

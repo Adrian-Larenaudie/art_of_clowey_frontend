@@ -6,6 +6,7 @@
         </div>
         <h1 class="menu_mobile_title">Menu</h1>
         <nav class="navigation_mobile">
+            <router-link class="navigation_mobile_link mobile_link" to="/backoffice/oeuvres">Back office</router-link>
             <router-link class="navigation_mobile_link mobile_link" to="/">Accueil</router-link>          
             <p class="navigation_mobile_link navigation_mobile_portfolio">Portfolio</p>
             <div class="horizontal_segment menu_mobile_segment"></div>

@@ -6,7 +6,7 @@
         </div>
         <h1 class="menu_mobile_title">Menu</h1>
         <nav class="navigation_mobile">
-            <router-link class="navigation_mobile_link mobile_link" to="/">Accueil</router-link>   
+            <router-link class="navigation_mobile_link mobile_link" to="/">Front office</router-link>   
             <router-link class="navigation_mobile_link mobile_link" to="/backoffice/admin">Admin</router-link>   
             <router-link class="navigation_mobile_link mobile_link" to="/backoffice/oeuvres">Dessins</router-link>   
             <router-link class="navigation_mobile_link mobile_link" to="/backoffice/categories">Catégories</router-link> 

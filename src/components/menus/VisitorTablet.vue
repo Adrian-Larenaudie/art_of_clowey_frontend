@@ -2,7 +2,8 @@
     <!-- Menu de navigation tablette -->
     <div class="application_block_tablet_menu">
         <nav class="tablet_menu">
-            <router-link class="tablet_menu_link" to="/">Accueil</router-link>        
+            <router-link class="tablet_menu_link" to="/backoffice/oeuvres">Back office</router-link> 
+            <router-link class="tablet_menu_link" to="/">Accueil</router-link> 
             <p class="tablet_menu_link" id="tablet_menu_portfolio">Portfolio</p>
             <router-link class="tablet_menu_link" to="/faq">FAQ</router-link>
         </nav>

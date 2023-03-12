@@ -6,7 +6,8 @@
                 <img src="@/assets/images/bannière.png" alt="dessin faisant office de banière pour illustrer la navigation du site">
             </div>
             <nav class="navigation">
-                <router-link class="navigation_link" to="/">Accueil</router-link>    
+                <router-link class="navigation_link" to="/backoffice/oeuvres">Back office</router-link>
+                <router-link class="navigation_link" to="/">Accueil</router-link>   
                 <p class="navigation_link" id="navigation_portfolio">Portfolio</p>
                 <div class="navigation__categories" id="navigation_wrapper">
                     <router-link class="navigation_link" to="/categories/digital">Digital</router-link>
