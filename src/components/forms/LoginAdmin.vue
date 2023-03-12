@@ -18,6 +18,8 @@
 <script>
 // import des services de connexion
 import { accountService } from '@/_services';
+import routingMessageInfoService from '@/_services/messageInfo.service.js';
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
     name : 'LoginAdminForm',
@@ -30,13 +32,24 @@ export default {
     },
     // méthodes de la vue
     methods: {
+        ...mapMutations('utils', ['setMessageInfo'],),
         login() {
             // on fait appel au service méthode login en envoyant un payload
             accountService.login({ email: this.email, password: this.password })
                 .then((response) => {
-                    // une fois la réponse récupérée sauvegarde du token et rédirection vers la page admin du backoffice
+                    // mise à jour du composant message info
+                    this.setMessageInfo(routingMessageInfoService('login_form', response.status));
+                    // affichage du composant message info
+                    document.querySelector('#message_info_block').style.opacity = 1;
+                    // une fois la réponse récupérée sauvegarde du token
                     accountService.saveUser(response.data.accessToken);
+                    // rédirection vers la page admin du backoffice
                     this.$router.push('/backoffice/admin');
+                }).catch((error) => {
+                    // mise à jour du composant message info
+                    this.setMessageInfo(routingMessageInfoService('login_form', error.response.status));
+                    // affichage du composant message info
+                    document.querySelector('#message_info_block').style.opacity = 1;
                 });
         },
     },

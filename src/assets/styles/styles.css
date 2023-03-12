@@ -872,3 +872,38 @@ input:focus, select:focus, textarea:focus  {
     border-color: var(--button-background-delete-color);
 }
 /* Button logout */
+
+/* MessageInfo component */
+.message_info_block {
+    font-size: .8rem;
+    cursor: pointer;
+    opacity: 0;
+    z-index: 10000;
+    position: absolute;
+    max-width: 1250px;
+    margin: auto 1rem;
+    width: 90%;
+    padding: .6rem 1rem;
+    top: 0;
+    text-align: center;
+    transition: .5s;
+}
+.success_message {
+    background-color: rgb(154, 206, 154);
+    border: solid 1px rgb(31, 116, 31);
+    color: rgb(31, 116, 31);
+}
+.error_message {
+    background-color: rgb(218, 169, 169);
+    border: solid 1px rgb(116, 31, 31);
+    color: rgb(82, 0, 0);;
+}
+.message_info_block_content {
+   font-weight: 600;
+}
+@media (max-width: 900px) {
+    .message_info_block {
+        width: 100%;
+    }
+}
+/* MessageInfo component */

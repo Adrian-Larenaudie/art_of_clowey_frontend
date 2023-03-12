@@ -1,27 +1,33 @@
 <template>
-<div class="message_info_block">
-    <p class="message_info_block_content">Voici un message informatif</p>
+<div id="message_info_block" v-bind:class="getMessageInfo.class + ' message_info_block'" @click="close" class="message_info_block">
+    <p class="message_info_block_content">{{ getMessageInfo.content }}</p>
 </div>
 </template>
 
 <script>
+import { mapGetters, mapMutations } from "vuex";
 
+export default {
+    name: 'MessageInfo',
+    computed: {
+        ...mapGetters('utils', ['getMessageInfo']),
+    },
+    // lorsque le composant est appelé
+    mounted() {
+
+    },
+    updated() {
+
+    },
+    watch() {
+
+    },
+    methods: {
+        ...mapMutations('utils', ['setMessageInfo'],),
+
+        close() {
+            document.querySelector('#message_info_block').style.opacity = 0;
+        }
+    }
+}
 </script>
-
-<style scoped>
-.message_info_block {
-    display: none;
-    z-index: 10000;
-    position: absolute;
-    background-color: rgb(134, 198, 134);
-    border: solid 1px rgb(31, 116, 31);
-    border-radius: .2rem;
-    width: 100%;
-    padding: .6rem 1rem;
-    top: 0;
-    text-align: center;
-}
-.message_info_block_content {
-    font-weight: 600;
-}
-</style>
