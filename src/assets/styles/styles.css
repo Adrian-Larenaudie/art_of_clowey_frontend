@@ -657,6 +657,25 @@ a {
         left: -100px;
     }
 }
+@media (max-width: 450px) {
+    .svg_info_panel .password_requirements {
+        left: -150px;
+    }
+}
+@media (max-width: 390px) {
+    .svg_info_panel .password_requirements {
+        padding: .2rem;
+        min-width: 200px;
+    }
+}
+@media (max-width: 375px) {
+    .svg_info_panel .password_requirements {
+        left: 0px;
+        bottom: 1rem;
+        top: auto;
+        height: fit-content;
+    }
+}
 /* backoffice page admin */
 
 /* backoffice page login */
