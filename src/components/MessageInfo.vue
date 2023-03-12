@@ -10,6 +10,7 @@
 
 <style scoped>
 .message_info_block {
+    display: none;
     z-index: 10000;
     position: absolute;
     background-color: rgb(134, 198, 134);

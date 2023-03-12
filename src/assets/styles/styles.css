@@ -49,6 +49,7 @@ a {
     width: 100%;
 }
 .application_block {
+    position: relative;
     background-color: #fffffe;
     max-width: 1250px;
     width: 90%;
@@ -215,7 +216,7 @@ a {
 .burger_menu_openner {
     position: fixed;
     top: .5rem;
-    left: 1rem;
+    left: .5rem;
     z-index: 42;
 }
 *,*::before,*:after{box-sizing: border-box}
@@ -273,7 +274,7 @@ a {
 }
 @media (max-width: 400px) {
     .burger_menu_openner {
-        top: 2rem;
+        
     }
 }
 /* ----- burger menu ----- */
@@ -826,3 +827,29 @@ input:focus, select:focus, textarea:focus  {
 /* backoffice page présentation */
 
 /* FIN PAGES BACKOFFICE */
+
+/* Button logout */
+.logout_block {
+    position: absolute;
+    right: .5rem;
+    top: .5rem;
+}
+.logout_button {
+    z-index: 42;
+    cursor: pointer;
+    border: solid 2px var(--font-base-color);
+    border-radius: .2rem;
+    padding: .3rem .4rem;
+    font-size: .8rem;
+    font-family: 'Clowey', sans-serif;
+    font-weight: 600;
+    background-color: var(--button-background-delete-color);
+    color: var(--button-light-color); 
+    transition: var(--long-trnasition-timing);
+}
+.logout_button:hover {
+    background-color: var(--button-background-hover-color);
+    color: var(--button-background-delete-color);
+    border-color: var(--button-background-delete-color);
+}
+/* Button logout */

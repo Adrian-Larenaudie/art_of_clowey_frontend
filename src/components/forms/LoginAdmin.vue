@@ -34,7 +34,6 @@ export default {
             // on fait appel au service méthode login en envoyant un payload
             accountService.login({ email: this.email, password: this.password })
                 .then((response) => {
-                    console.log(response);
                     // une fois la réponse récupérée sauvegarde du token et rédirection vers la page admin du backoffice
                     accountService.saveUser(response.data.accessToken);
                     this.$router.push('/backoffice/admin');
