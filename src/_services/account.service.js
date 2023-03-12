@@ -24,14 +24,24 @@ let isLogged = () => {
     return !! accessToken;
 };
 
-let getHeaderConfig = () => {
+let getHeaderConfig = (json) => {
     let accessToken = localStorage.getItem('accessToken')
-    return {
-        headers: {
-            'Authorization': `Bearer ${accessToken}`,
-            'Content-Type': 'multipart/form-data'
-        }
-    };
+    if(json) {
+        return {
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json'
+            }
+        };
+    } else {
+        return {
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'multipart/form-data'
+            }
+        };
+    }
+    
 };
 
 export const accountService = {
