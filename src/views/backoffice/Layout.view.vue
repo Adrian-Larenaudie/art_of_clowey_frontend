@@ -25,7 +25,6 @@ import MenuAdminTablet from '@/components/menus/AdminTablet.vue';
 import ModalAdminMobileMenu from '@/components/modals/AdminMobileMenu.vue';
 import BlockTitle from '@/components/BlockTitle.vue';
 import MainFooter from '@/components/MainFooter.vue';
-import { RouterView } from 'vue-router';
 
 export default {
     name: 'AdminLayoutView',
