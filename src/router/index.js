@@ -3,6 +3,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import * as frontoffice from '@/views/frontoffice';
 import * as backoffice from '@/views/backoffice';
 
+// import du gardien qui redirige vers login sur les routes du backoffice si il n'y a pas de token en local storage
+import { authGuard } from '@/_helpers/authGuard.js';
+
 // déclaration des routes
 const routes = [
     {
@@ -14,7 +17,7 @@ const routes = [
             { path: '', name: 'home', component: frontoffice.Home },
             { path: 'portfolio/:category', name: 'portfolio', component: frontoffice.Portfolio },
             { path: 'faq', name: 'faq', component: frontoffice.Faq },
-            { path: 'backoffice/login', name: 'login', component: frontoffice.Login },
+            { path: 'login', name: 'login', component: frontoffice.Login },
         ]
     },
 
@@ -32,6 +35,7 @@ const routes = [
 
         ]
     },
+
     {
         // si la route demandé n'existe pas on redirige vers la home (on pourrait aussi jouer une vue erreur)
         path: '/:pathMatch(.*)*', redirect: '/',
@@ -43,6 +47,16 @@ const routes = [
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes
+});
+
+// Déclanchement du gardien de route sur les routes du backoffice
+router.beforeEach((to, from, next) => {
+    /// on dit que si la route contient 'backoffice'
+    if(to.matched[0].name === 'backoffice') {
+        // on doit passer par notre gardien
+        authGuard();
+    }
+    next();
 });
 
 export default router
