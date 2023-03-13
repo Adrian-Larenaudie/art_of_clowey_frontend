@@ -1,6 +1,6 @@
 /* module de validation des données de l'ensemble des formulaires de l'application */
 
-const dataValidator = (form) => {
+const dataValidatorService = (form) => {
     switch (form) {
         case 'login_form':
             
@@ -41,4 +41,4 @@ const dataValidator = (form) => {
     return true;
 };
 
-export default dataValidator;
+export default dataValidatorService;

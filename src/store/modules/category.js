@@ -1,6 +1,7 @@
 import Axios from '@/_services/caller.service.js';
 import { accountService } from '@/_services';
 import routingMessageInfoService from '@/_services/messageInfo.service.js';
+import dataValidatorService from '@/_services/dataValidator.service.js';
 
 export default {
     namespaced: true,
@@ -30,26 +31,40 @@ export default {
                     const response = await Axios.get('/category');
                     const categories = response.data;
                     context.commit('setAllCategories', categories);
-                }   
+                }             
             } catch (error) {
                 console.log(error);
-            };    
+            } finally {
+                
+            };  
         },
         async actionUpdateCategory(context, { categoryId }) {
             try {
+                // activation du loader
+                context.commit('utils/toggleMainBackofficeLoader', {}, {root: true});
+                // préparation du body  
                 const categoryToUpdate = context.getters.getCategoryById(categoryId);
                 const body = {
                     name: categoryToUpdate.name,
                     description: categoryToUpdate.description,
                     active: categoryToUpdate.active,
                 }
+                // envoie de la requête
                 const response = await Axios.patch(`/category/${categoryId}`, body, accountService.getHeaderConfig(true));
+                // appel du service et de la mutation pour afficher un message d'information à l'admin
                 context.commit('utils/setMessageInfo', routingMessageInfoService('update_category_form', response.status), {root: true});
             } catch (error) {
                 context.commit('utils/setMessageInfo', routingMessageInfoService('update_category_form', error.response.status), {root: true});    
+            } finally {
+                // pour une meilleure expérience utilisateur un léger timing avant de faire disparaitre le loader 
+                setTimeout(() => {
+                    // désacitvation du loader
+                    context.commit('utils/toggleMainBackofficeLoader', {}, {root: true});  
+                    // affichage du composant message info
+                    if(message_info_block) 
+                        document.querySelector('#message_info_block').style.opacity = 1; 
+                }, 500);
             }; 
-            // affichage du composant message info
-            document.querySelector('#message_info_block').style.opacity = 1;
         },
         // todo
         async actionAddNewCategory(context) {
