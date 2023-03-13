@@ -1,4 +1,6 @@
 import Axios from '@/_services/caller.service.js';
+import { accountService } from '@/_services';
+import routingMessageInfoService from '@/_services/messageInfo.service.js';
 
 export default {
     namespaced: true,
@@ -14,16 +16,16 @@ export default {
     
     getters: {
         // récupère le state faqs
-        getAllCategories: (state) => {
-            return state.categories;
+        getAllFaqs: (state) => {
+            return state.faqs;
         },
         // récupère une faq depuis le state faqs à l'aide de son ID
-        getCategoryById: (state) => (faqId) => {
+        getFaqById: (state) => (faqId) => {
             const faqs = state.faqs.data;
             return faqs.find(faq => faq.id === faqId);
         },
         // récupère le state newFaq
-        getNewCategory: (state) => {
+        getNewFaq: (state) => {
             return state.newFaq;
         },
     },
@@ -77,7 +79,7 @@ export default {
                 // activation du loader
                 context.commit('utils/toggleMainBackofficeLoader', {}, {root: true});
                 // préparation du body  
-                const newFaq = context.getters.getNewCategory;
+                const newFaq = context.getters.getNewFaq;
                 const body = {
                     question: newFaq.question,
                     answer: newFaq.answer,
@@ -91,6 +93,7 @@ export default {
                 // on réinitialise le formulaire
                 context.commit('setInitialNewFaqState');
             } catch (error) {
+                console.log(error);
                 context.commit('utils/setMessageInfo', routingMessageInfoService('add_faq_form', error.response.status), {root: true});    
             } finally {
                 // pour une meilleure expérience utilisateur un léger timing avant de faire disparaitre le loader 
@@ -144,12 +147,12 @@ export default {
         // mutation de modification d'un champs précis du state newFaq
         setNewFaqFieldValue(state, { field, value }) {
             const newFaq = state.newFaq;
-            newCategory[field] = value;
+            newFaq[field] = value;
             state.newFaq = newFaq;
         },
         // mutation qui permet de remettre le state initial de newFaq
         setInitialNewFaqState(state) {
-            return state.newCategory = {
+            return state.newFaq = {
                 question: '',
                 answer: '',
             }

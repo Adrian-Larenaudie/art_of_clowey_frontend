@@ -8,14 +8,14 @@
             </svg>    
         </label>
         <div class="answer">
-            <form class="new_faq_form">
+            <form @submit.prevent="onSubmit" class="new_faq_form">
                 <div class="login_field">
                     <label for="new_faq_question">Question*</label>
-                    <textarea class="standart_form_textarea" id="new_faq_question"></textarea>
+                    <textarea @change="onChangeField" name="question" :value="getNewFaq.question" class="standart_form_textarea" id="new_faq_question"></textarea>
                 </div>
                 <div class="login_field">
                     <label for="new_faq_answer">Réponse*</label>
-                    <textarea class="standart_form_textarea" id="new_faq_answer"></textarea>
+                    <textarea @change="onChangeField" name="answer" :value="getNewFaq.answer" class="standart_form_textarea" id="new_faq_answer"></textarea>
                 </div>
                 <div class="login_field">
                     <button class="login_submit">Ajouter</button>
@@ -26,7 +26,24 @@
 </template>
 
 <script>
+import { mapActions, mapGetters, mapMutations } from "vuex";
+
 export default {
     name : 'AddFaqForm',
+    computed: {
+        ...mapGetters('faq', ['getNewFaq'])
+    },
+    methods: {
+        ...mapMutations('faq', ['setNewFaqFieldValue']),
+        ...mapActions('faq', ['actionAddNewFaq']),
+        // sur le changement d'un des champs on modifie le state
+        onChangeField(event) {
+            this.setNewFaqFieldValue({ field: event.target.name, value: event.target.value });        
+        },
+        // sur la soumission du formulaire on lance l'action de création de nouvelle catégorie
+        onSubmit(event) {
+            this.actionAddNewFaq();
+        },
+    },
 };
 </script>

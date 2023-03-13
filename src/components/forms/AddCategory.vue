@@ -42,11 +42,11 @@ export default {
         ...mapActions('category', ['actionAddNewCategory']),
         // sur le changement d'un des champs on modifie le state
         onChangeField(event) {
-            this.setNewCategoryFieldValue({ field: event.target.name, value: event.target.value, categoryId: this.categoryId });        
+            this.setNewCategoryFieldValue({ field: event.target.name, value: event.target.value });        
         },
         // sur la soumission du formulaire on lance l'action de création de nouvelle catégorie
         onSubmit(event) {
-            this.actionAddNewCategory({ categoryId: this.categoryId })
+            this.actionAddNewCategory();
         },
     },
 };
