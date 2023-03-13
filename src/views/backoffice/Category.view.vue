@@ -24,7 +24,7 @@ export default {
         ...mapActions('category', ['actionGetAllCategories']),
     },
     mounted() {
-        // appel des catégories opn force l'appel en backoffice même si déjà présente dans le state
+        // appel des catégories, on force l'appel en backoffice même si déjà présente dans le state
         this.actionGetAllCategories({ force: true });
     },
 };

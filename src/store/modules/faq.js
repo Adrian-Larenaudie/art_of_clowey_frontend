@@ -35,7 +35,7 @@ export default {
         async actionGetAllFaqs(context,  { force }) {
             try {
                 if(context.state.faqs.length === 0 || force !== false) {
-                    const response = await Axios.get('/category');
+                    const response = await Axios.get('/faq');
                     const faqs = response.data;
                     context.commit('setAllFaqs', faqs);
                 }             
@@ -51,7 +51,7 @@ export default {
                 // activation du loader
                 context.commit('utils/toggleMainBackofficeLoader', {}, {root: true});
                 // préparation du body  
-                const faqToUpdate = context.getters.getCategoryById(faqId);
+                const faqToUpdate = context.getters.getFaqById(faqId);
                 const body = {
                     question: faqToUpdate.question,
                     answer: faqToUpdate.answer,
@@ -61,6 +61,7 @@ export default {
                 // appel du service et de la mutation pour afficher un message d'information à l'admin
                 context.commit('utils/setMessageInfo', routingMessageInfoService('update_faq_form', response.status), {root: true});
             } catch (error) {
+                console.log(error);
                 context.commit('utils/setMessageInfo', routingMessageInfoService('update_faq_form', error.response.status), {root: true});    
             } finally {
                 // pour une meilleure expérience utilisateur un léger timing avant de faire disparaitre le loader 

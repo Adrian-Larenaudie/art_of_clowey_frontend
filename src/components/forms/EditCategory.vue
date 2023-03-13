@@ -55,6 +55,5 @@ export default {
             this.actionDeleteCategory({ categoryId: this.categoryId })
         },
     },
-    
 };
 </script>
