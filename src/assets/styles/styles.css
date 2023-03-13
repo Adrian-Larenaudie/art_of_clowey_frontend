@@ -21,6 +21,11 @@ select {
     font-size: 1rem;
     color: #000;
 }
+textarea, input {
+    font-family: 'Clowey', sans-serif;
+    font-size: 1rem;
+    color: var(--font-main-color);
+}
 html::-webkit-scrollbar {
     width: 0 !important;
     

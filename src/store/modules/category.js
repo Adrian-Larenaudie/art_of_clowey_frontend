@@ -2,7 +2,7 @@ import Axios from '@/_services/caller.service.js';
 import { accountService } from '@/_services';
 import routingMessageInfoService from '@/_services/messageInfo.service.js';
 
-// todo ajouter des validation de données sur la soumission du formulaire
+// todo ajouter des validations de données sur la soumission du formulaire
 import dataValidatorService from '@/_services/dataValidator.service.js';
 
 export default {

@@ -66,11 +66,40 @@ const routingMessageInfoService = (formName, status) => {
             case 'add_work_form':
                 
                 break;
+            // formulaire de modification d'une faq
             case 'update_faq_form':
-            
+                switch (status) {
+                    case 200:
+                        return {class: 'success_message', content: 'Faq modifiée avec succès !'};
+                        break;
+                    case 204:
+                        return {class: 'success_message', content: 'Faq supprimée avec succès !'};
+                        break;
+                    case 400:
+                        return {class: 'error_message', content: 'Il manque des paramètres'};
+                        break;
+                    case 409:
+                        return {class: 'error_message', content: 'Faq inexistante'};
+                        break;
+                    default:
+                        break;
+                }
                 break;
+            // formulaire d'ajout d'une nouvelle faq
             case 'add_faq_form':
-                
+                switch (status) {
+                    case 200:
+                        return {class: 'success_message', content: 'Faq ajoutée avec succès !'};
+                        break;
+                    case 400:
+                        return {class: 'error_message', content: 'Il manque des paramètres'};
+                        break;
+                    case 409:
+                        return {class: 'error_message', content: 'Faq inexistante'};
+                        break;
+                    default:
+                        break;
+                }
                 break;
             case 'update_admin_pseudo_form':
                 
