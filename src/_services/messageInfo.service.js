@@ -43,12 +43,25 @@ const routingMessageInfoService = (formName, status) => {
                         break;
                 }
                 break;
-            // formulaires suivants
+            // formulaire d'ajout d'une nouvelle catégorie
             case 'add_category_form':
-            
-            break;
+                switch (status) {
+                    case 200:
+                        return {class: 'success_message', content: 'Category ajoutée avec succès !'};
+                        break;
+                    case 400:
+                        return {class: 'error_message', content: 'Il manque des paramètres'};
+                        break;
+                    case 409:
+                        return {class: 'error_message', content: 'Cette catégorie existe déjà'};
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            // formulaires suivants
             case 'update_work_form':
-            
+          
                 break;
             case 'add_work_form':
                 

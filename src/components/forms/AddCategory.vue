@@ -8,18 +8,18 @@
             </svg>    
         </label>
         <div class="answer">
-            <form class="new_category_form">
+            <form @submit.prevent="onSubmit" class="new_category_form">
                 <div class="login_field">
-                    <label for="new_category_name">Nom*</label>
-                    <input class="standart_form_input" id="new_category_name" type="text">
+                    <label for="add_new_category_name">Nom*</label>
+                    <input @change="onChangeField" name="name" :value="getNewCategory.name" class="standart_form_input" type="text" id="add_new_category_name">
                 </div>
                 <div class="login_field">
-                    <label for="new_category_description">Description courte</label>
-                    <textarea class="standart_form_textarea" id="new_category_description"></textarea>
+                    <label for="add_new_category_description">Description courte</label>
+                    <textarea @change="onChangeField" name="description" :value="getNewCategory.description" class="standart_form_textarea" id="add_new_category_description"></textarea>
                 </div>
                 <div class="login_field_checkbox">
-                    <label for="new_category_ative">Activer la présence sur le portfolio</label>
-                    <input class="checkbox_form_input" id="new_category_ative" type="checkbox">
+                    <label for="add_new_category_checkbox">Activer la présence sur le portfolio</label>
+                    <input @change="onChangeField" class="checkbox_form_input" name="active" :checked="getNewCategory.active" id="add_new_category_checkbox" type="checkbox">
                 </div>
                 <div class="login_field">
                     <button class="login_submit">Ajouter</button>
@@ -30,7 +30,24 @@
 </template>
 
 <script>
+import { mapActions, mapGetters, mapMutations } from "vuex";
+
 export default {
     name : 'AddCategoryForm',
+    computed: {
+        ...mapGetters('category', ['getNewCategory'])
+    },
+    methods: {
+        ...mapMutations('category', ['setNewCategoryFieldValue']),
+        ...mapActions('category', ['actionAddNewCategory']),
+        // sur le changement d'un des champs on modifie le state
+        onChangeField(event) {
+            this.setNewCategoryFieldValue({ field: event.target.name, value: event.target.value, categoryId: this.categoryId });        
+        },
+        // sur la soumission du formulaire on lance l'action de création de nouvelle catégorie
+        onSubmit(event) {
+            this.actionAddNewCategory({ categoryId: this.categoryId })
+        },
+    },
 };
 </script>

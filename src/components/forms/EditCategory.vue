@@ -10,16 +10,16 @@
         <div class="answer">
             <form @submit.prevent="onSubmit" class="update_category_form">
                 <div class="login_field">
-                    <label>Nom*</label>
-                    <input @change="onChangeField" name="name" :value="getCategoryById(categoryId).name" class="standart_form_input" type="text">
+                    <label :for="categoryId + 'name'">Nom*</label>
+                    <input @change="onChangeField" name="name" :value="getCategoryById(categoryId).name" class="standart_form_input" type="text" :id="categoryId + 'name'">
                 </div>
                 <div class="login_field">
-                    <label>Description courte</label>
-                    <textarea @change="onChangeField" name="description" :value="getCategoryById(categoryId).description" class="standart_form_textarea"></textarea>
+                    <label :for="categoryId + 'description'">Description courte</label>
+                    <textarea @change="onChangeField" name="description" :value="getCategoryById(categoryId).description" class="standart_form_textarea" :id="categoryId + 'description'"></textarea>
                 </div>
                 <div class="login_field_checkbox">
-                    <label>Activer la présence sur le portfolio</label>
-                    <input @change="onChangeField" name="active" :checked="getCategoryById(categoryId).active" class="checkbox_form_input" type="checkbox">
+                    <label :for="categoryId + 'active'">Activer la présence sur le portfolio</label>
+                    <input @change="onChangeField" name="active" :checked="getCategoryById(categoryId).active" class="checkbox_form_input" type="checkbox" :id="categoryId + 'active'">
                 </div>
                 <div class="login_field submit_area">
                     <button class="login_submit">Modifier</button>
@@ -46,9 +46,11 @@ export default {
         onChangeField(event) {
             this.setUpdateCategoryFieldValue({ field: event.target.name, value: event.target.value, categoryId: this.categoryId });        
         },
+        // sur la soumimssion du formulaire on lance la action de modification de la catégorie
         onSubmit(event) {
             this.actionUpdateCategory({ categoryId: this.categoryId })
         },
+        // sur le click du boutton supprimer on lance l'action de suppression de category 
         onClick(event) {
             this.actionDeleteCategory({ categoryId: this.categoryId })
         },
