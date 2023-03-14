@@ -1,20 +1,118 @@
 import Axios from '@/_services/caller.service.js';
+import { accountService } from '@/_services';
+import routingMessageInfoService from '@/_services/messageInfo.service.js';
 
 export default {
     namespaced: true,
     state:() => ({
-        connected: false,
+        presentation: {
+            title: '',
+            imageUrl: '',
+            paragrpahs: [],
+        },
+        newImage: '', 
     }), 
     
     getters: {
-
+        // récupère la présentation depuis le state
+        getPresentation: (state) => {
+            return state.presentation;
+        },
+        // récupère la valeur de newImage depuis le state
+        getNewImage: (state) => {
+            return state.newImage;
+        },
     },
 
     actions: {
-        
+        // récupère la présentation depuis l'API
+        async actionGetPresentation(context, { force }) {
+            try {
+                if(context.state.presentation.title !== '' || force !== false) {
+                    const response = await Axios.get('/presentation');
+                    const presentation = response.data.data;
+                    context.commit('setPresentation', presentation);
+                }          
+            } catch (error) {
+                console.log(error);
+            } finally {
+
+            }
+        },
+        // envoie la modification de la présentation avec tout les paragraphes à modifier
+        async actionUpdatePresentation(context) {
+            try {
+                
+            } catch (error) {
+                
+            } finally {
+                
+            }
+        },
+        // ajoute un nouveau paragraphe vide en BDD 
+        async actionAddNewParagraph(context) {
+            try {
+                const response = await Axios.put('/presentation/paragraph', {}, accountService.getHeaderConfig(true));
+                const newParagraph = response.data.data;
+                context.commit('setNewParagraph', newParagraph);
+                // appel de la mutation pour afficher un message d'information à l'admin
+                context.commit('utils/setMessageInfo', {class: 'success_message', content: 'Paragraphe ajouté avec succès !'}, {root: true});
+            } catch (error) {
+                // sur l'erreur on scroll top pour montrer le message d'erreur à l'admin
+                window.scroll(0, 0)
+                context.commit('utils/setMessageInfo', {class: 'error_message', content: 'Erreur serveur'}, {root: true});
+            } finally { 
+                // affichage du composant message info
+                if(message_info_block) 
+                    document.querySelector('#message_info_block').style.opacity = 1; 
+            }
+        },
+        // supprime un paragraph en BDD à l'aide de son ID
+        async actionDeleteParagraph(context, { paragraphId }) {
+            try {
+                await Axios.delete(`/presentation/paragraph/${paragraphId}`, accountService.getHeaderConfig(true));
+                // appel de la mutation pour retrait du prargaphe dans le state
+                context.commit('unSetParagraph', paragraphId)
+                // appel de la mutation pour afficher un message d'information à l'admin
+                context.commit('utils/setMessageInfo', {class: 'success_message', content: 'Paragraphe supprimé avec succès !'}, {root: true});
+            } catch (error) {
+                // sur l'erreur on scroll top pour montrer le message d'erreur à l'admin
+                window.scroll(0, 0)
+                context.commit('utils/setMessageInfo', {class: 'error_message', content: 'Erreur serveur'}, {root: true});
+            } finally {
+                // affichage du composant message info
+                if(message_info_block) 
+                    document.querySelector('#message_info_block').style.opacity = 1; 
+            }
+        },
+
     },
     
     mutations: {
-      
+        // ajoute la présentation dans le state après l'action de récupération depuis l'API
+        setPresentation(state, presentation) {
+            state.presentation = presentation;
+        },
+        // à l'aide d'un id modifie la valeur du paragraphe dans le state
+        setParagraphFieldValue(state, { value, paragraphId }) {
+            state.presentation.paragraphs.find(paragraph => paragraph.id == paragraphId).content = value;
+        },
+        // modifie la valeur du champ title de la présentation dans le state
+        setTitleValue(state, { value }) {
+            state.presentation.title = value;
+        },
+        // modifie dans le state la valeur de l'image à envoyer vers l'API
+        setNewImageValue(state, { image }) {
+
+        },
+        // ajoute dans le state le paragraphe passé en paramètre
+        setNewParagraph(state, newParagraph) {
+            state.presentation.paragraphs.push({ id: newParagraph.id, content: newParagraph.content });
+        },
+        // retire un paragraphe qui vient d'être supprimé après l'action delete
+        unSetParagraph(state, paragraphId) {
+            console.log(paragraphId);
+            state.presentation.paragraphs = state.presentation.paragraphs.filter(paragraph => paragraph.id != paragraphId);
+        },
     },
 };

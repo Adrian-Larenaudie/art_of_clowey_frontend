@@ -30,9 +30,11 @@
                         <option value="">Aquarelle</option>
                     </select>
                 </div>
-                <div class="login_field">
-                    <input id="new_work_file" type='file'/>
-                    <div class="file_form_input" id="file_form_input" >Charger un fichier*</div>
+                <div class="file_loader login_field">
+                    <div class="file_form_input" id="file_form_input">
+                        Charger un fichier*
+                        <input id="new_work_file" type='file'/>
+                    </div>
                 </div>
                 <div class="login_field">
                     <img class="new_work_image" src="" alt="">

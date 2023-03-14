@@ -7,11 +7,22 @@
 
 <script>
 import EditPresentationForm from '@/components/forms/EditPresentation.vue';
+import { mapActions, mapGetters } from "vuex";
 
 export default {
     name: 'PresentationView',
     components: {
         EditPresentationForm,
-    }
+    },
+    computed: {
+        ...mapGetters('presentation', ['getPresentation'])
+    },
+    methods: {
+        ...mapActions('presentation', ['actionGetPresentation']),
+    },
+    mounted() {
+        // appel de la présentation en force
+        this.actionGetPresentation({ force: true });
+    },
 };
 </script>

@@ -816,7 +816,7 @@ input:focus, select:focus, textarea:focus  {
     fill: var(--button-background-delete-color); 
 }
 .update_presentation_segment {
-    margin: 1.5rem 2rem 0 2rem;
+    margin: 1.5rem 2rem 1.5rem 2rem;
 
 }
 .backoffice_presentation_block_image {
@@ -911,3 +911,20 @@ input:focus, select:focus, textarea:focus  {
     }
 }
 /* MessageInfo component */
+
+/* fix style */
+
+/* 1. fix input file */
+.file_loader div {
+    position: relative;
+}
+.file_loader input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+/* fix style */
