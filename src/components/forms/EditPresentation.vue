@@ -74,27 +74,27 @@ export default {
         ...mapActions('presentation', ['actionUpdatePresentation',  'actionDeleteParagraph', 'actionAddNewParagraph']),
         // sur le changement d'un des champs on modifie le state
         onChangeField(event) {
+            // dans le cas du titre
             if(event.target.name == 'title') {
                 this.setTitleValue({ field: event.target.name, value: event.target.value });
+            // dans le cas d'un paragraphe
             } else if (event.target.name == 'content') {
-                this.setParagraphFieldValue({ field: event.target.name, value: event.target.value, paragraphId: event.target.id })
+                this.setParagraphFieldValue({ field: event.target.name, value: event.target.value, paragraphId: event.target.id });
+            // dans le cas de l'image associée à la présenation
             } else if(event.target.name === 'file') {
-
-                // traitemant de l'image
+            // **** ici on veut afficher l'image redimensionnée dans une balise img & sauvegarder le file dans le state **** //
+                // instanciation d'un lecteur de fichier
                 let reader = new FileReader();
                 // création d'un canvas pour dessiner l'image redimensionnée
                 const canvas = document.createElement('canvas');
                 // récupération du fichier dans l'input
                 const file = event.target.files[0];
-
                 // Ajoutez un événement pour détecter la fin de la lecture du fichier
                 reader.addEventListener('load', () => {
                     // création d'une nouvelle image
                     const img = new Image();
-                    img.crossOrigin = "Anonymous";
                     // sur le chargement de cette image
                     img.addEventListener('load', () => {
-
                         // récupération des dimensions de l'image
                         const width = img.width;
                         const height = img.height;
@@ -106,7 +106,7 @@ export default {
                             newWidth = 500;
                             newHeight = Math.round(height * (newWidth / width));
                         }
-                        
+                        // on donne les nouvelles valeurs à l'image
                         canvas.width = newWidth;
                         canvas.height = newHeight;
                         const ctx = canvas.getContext('2d');
@@ -115,32 +115,20 @@ export default {
                         // récupération de l'URL de l'image redimensionnée
                         const dataUrl = canvas.toDataURL('image/jpeg');
 
-                        // envoie de l'url dans le state newImageUrl
+                        // envoie de l'url dans le state newImageUrl qui va nous servir à l'afficher dans la balise img dédiée
                         this.setNewImageValue({ field: 'newImageUrl', value: dataUrl });
                     });  
 
                     // définition de la source de l'image sur l'URL du fichier sélectionné
                     img.src = reader.result;
-            //!!!!!! TODO cette partie ne fonctionne pas j'ai une image soit toue noire soit toute grise !!!!!
-                    // Convertir le canvas en blob
-                    canvas.toBlob((blob) => {
-                        // Créer un objet File à partir du blob
-                        const newFile = new File([blob], file.name, {
-                        type: file.type,
-                        lastModified: file.lastModified
-                        });
-                        console.log(newFile);
-            //!!!!!! TODO cette partie ne fonctionne pas du coup j'envoie le file de l'input pour le moment !!!!!
-                        // envoie dans le state du file
-                        this.setNewImageValue({ field: 'newImage', value: file });
-                    }, file.type, 1);
+                    // envoie dans le state du file
+                    this.setNewImageValue({ field: 'newImage', value: file });
                 });
-                // Commencez à lire le fichier sélectionné
-                console.log(event.target.files[0]);
+                // commence à lire le fichier sélectionné
                 reader.readAsDataURL(event.target.files[0]);      
             };           
         },
-        // sur la soumimssion du formulaire on lance la action de modification de la présentation
+        // sur la soumimssion du formulaire on lance l'action de modification de la présentation
         onSubmit(event) {
             this.actionUpdatePresentation()
         },

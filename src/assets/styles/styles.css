@@ -567,15 +567,20 @@ a {
 }
 .new_work_image_block {
     justify-content: flex-start;
+    background-color: lightgrey;
+    min-height: calc(150px);
+}
+.new_work_image_block_image img {
+    margin: auto;
 }
 .new_work_image_title {
+    width: 100%;
     background-color: var(--main-background-color);
 }
 .new_work_image {
     background-color: lightgrey;
-    width: 250px;
-    min-height: 250px;
-    
+    max-width: 250px;
+    min-width: 250px;  
 }
 #new_work_file {
     opacity: 0;
@@ -766,6 +771,7 @@ a {
     transition: var(--long-trnasition-timing);
 }
 .new_work_submit {
+    margin-left: 0;
     align-self: center;
 }
 .login_submit:hover {

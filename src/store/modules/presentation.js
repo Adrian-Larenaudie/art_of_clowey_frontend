@@ -62,7 +62,8 @@ export default {
                 const formData = new FormData();
                 formData.append('title', context.getters.getPresentation.title);
                 formData.append('paragraphs', JSON.stringify(context.getters.getAllParagraphs));
-                formData.append('file', context.getters.getNewImage, context.getters.getNewImage.name);
+                if(context.getters.getNewImage !== '')
+                    formData.append('file', context.getters.getNewImage, context.getters.getNewImage.name);
                 // envoie de la requête false pour dire qu'il ne s'agit pas de json
                 const response = await Axios.patch(`/presentation`, formData, accountService.getHeaderConfig(false));
                 // appel du service et de la mutation pour afficher un message d'information à l'admin
