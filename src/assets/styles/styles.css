@@ -229,7 +229,7 @@ a {
     visibility: hidden;
 }
 .menu_hamburger+label{
-    background-color: #fffffe;
+    background-color: var(--main-background-color);
     border: solid 1px #006E90;
     border-radius: .2rem;
     cursor: pointer;
@@ -565,11 +565,17 @@ a {
     background-color: var(--button-light-color);
     color: var(--button-background-link-color);
 }
+.new_work_image_block {
+    justify-content: flex-start;
+}
+.new_work_image_title {
+    background-color: var(--main-background-color);
+}
 .new_work_image {
     background-color: lightgrey;
-    height: 250px;
     width: 250px;
-    margin: auto;
+    min-height: 250px;
+    
 }
 #new_work_file {
     opacity: 0;
@@ -832,7 +838,6 @@ input:focus, select:focus, textarea:focus  {
 .backoffice_presentation_block_image div {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
 .backoffice_presentation_block_image p {

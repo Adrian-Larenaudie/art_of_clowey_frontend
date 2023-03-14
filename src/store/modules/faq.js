@@ -61,7 +61,6 @@ export default {
                 // appel du service et de la mutation pour afficher un message d'information à l'admin
                 context.commit('utils/setMessageInfo', routingMessageInfoService('update_faq_form', response.status), {root: true});
             } catch (error) {
-                console.log(error);
                 context.commit('utils/setMessageInfo', routingMessageInfoService('update_faq_form', error.response.status), {root: true});    
             } finally {
                 // pour une meilleure expérience utilisateur un léger timing avant de faire disparaitre le loader 

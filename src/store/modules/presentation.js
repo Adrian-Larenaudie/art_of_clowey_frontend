@@ -5,12 +5,15 @@ import routingMessageInfoService from '@/_services/messageInfo.service.js';
 export default {
     namespaced: true,
     state:() => ({
+        // correspond aux donnée de la présentation
         presentation: {
             title: '',
             imageUrl: '',
-            paragrpahs: [],
+            paragraphs: [],
         },
+        // reçoit la nouvelle image à modifier en BDD
         newImage: '', 
+        newImageUrl: '',
     }), 
     
     getters: {
@@ -21,6 +24,17 @@ export default {
         // récupère la valeur de newImage depuis le state
         getNewImage: (state) => {
             return state.newImage;
+        },
+        // récupère la valeur de newImageUrl depuis le state
+        getNewImageUrl: (state) => {
+            return state.newImageUrl;
+        },
+        getAllParagraphs: (state) => {
+            let body= [];
+            for (let index = 0; index < state.presentation.paragraphs.length; index++) {
+                body.push({ id: state.presentation.paragraphs[index].id, content: state.presentation.paragraphs[index].content })     
+            }
+            return body
         },
     },
 
@@ -42,12 +56,30 @@ export default {
         // envoie la modification de la présentation avec tout les paragraphes à modifier
         async actionUpdatePresentation(context) {
             try {
-                
+                // activation du loader
+                context.commit('utils/toggleMainBackofficeLoader', {}, {root: true});
+                // préparation du body au format multipart/form-data 
+                const formData = new FormData();
+                formData.append('title', context.getters.getPresentation.title);
+                formData.append('paragraphs', JSON.stringify(context.getters.getAllParagraphs));
+                formData.append('file', context.getters.getNewImage, context.getters.getNewImage.name);
+                // envoie de la requête false pour dire qu'il ne s'agit pas de json
+                const response = await Axios.patch(`/presentation`, formData, accountService.getHeaderConfig(false));
+                // appel du service et de la mutation pour afficher un message d'information à l'admin
+                context.commit('utils/setMessageInfo', routingMessageInfoService('update_presentation_form', response.status), {root: true});
             } catch (error) {
-                
+                console.log(error);
+                context.commit('utils/setMessageInfo', routingMessageInfoService('update_presentation_form', error.response.status), {root: true});    
             } finally {
-                
-            }
+                // pour une meilleure expérience utilisateur un léger timing avant de faire disparaitre le loader 
+                setTimeout(() => {
+                    // désacitvation du loader
+                    context.commit('utils/toggleMainBackofficeLoader', {}, {root: true});  
+                    // affichage du composant message info
+                    if(message_info_block) 
+                        document.querySelector('#message_info_block').style.opacity = 1; 
+                }, 500);
+            }; 
         },
         // ajoute un nouveau paragraphe vide en BDD 
         async actionAddNewParagraph(context) {
@@ -102,8 +134,8 @@ export default {
             state.presentation.title = value;
         },
         // modifie dans le state la valeur de l'image à envoyer vers l'API
-        setNewImageValue(state, { image }) {
-
+        setNewImageValue(state, { field, value }) {
+            state[field] = value;
         },
         // ajoute dans le state le paragraphe passé en paramètre
         setNewParagraph(state, newParagraph) {
@@ -111,7 +143,6 @@ export default {
         },
         // retire un paragraphe qui vient d'être supprimé après l'action delete
         unSetParagraph(state, paragraphId) {
-            console.log(paragraphId);
             state.presentation.paragraphs = state.presentation.paragraphs.filter(paragraph => paragraph.id != paragraphId);
         },
     },

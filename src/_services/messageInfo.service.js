@@ -110,8 +110,24 @@ const routingMessageInfoService = (formName, status) => {
             case 'update_admin_password_form':
                 
                 break;
+            // formulaire de modification de présentation
             case 'update_presentation_form':
-                
+                switch (status) {
+                    case 200:
+                        return {class: 'success_message', content: 'Présentation modifiée avec succès !'};
+                        break;
+                    case 400:
+                        return {class: 'error_message', content: 'Il manque des paramètres'};
+                        break;
+                    case 409:
+                        return {class: 'error_message', content: 'Présentation ou un des paragraphes inexistant'};
+                        break;
+                    case 401:
+                        return {class: 'error_message', content: 'Mauvaise requête'};
+                        break;
+                    default:
+                        break;
+                }
                 break;
             default:
                 break;

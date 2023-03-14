@@ -41,17 +41,17 @@
         <div class="file_loader login_field">
             <div class="file_form_input" id="file_form_input">
                 Charger un fichier*
-                <input id="new_work_file" type='file'/>
+                <input @change="onChangeField" name="file" id="new_work_file" type='file'/>
             </div>
         </div>
         <div class="login_field backoffice_presentation_block_image">
-            <div>
-                <div>Ancienne image</div>
-                <img class="new_work_image" src="" alt="">
+            <div class="new_work_image_block">
+                <div class="new_work_image_title">Image courante</div>
+                <img class="new_work_image" :src="getPresentation.imageUrl + '?timestamp=' + new Date().getTime()" alt="">
             </div>
-            <div>
-                <div>Nouvelle image</div>
-                <img class="new_work_image" src="" alt="">
+            <div class="new_work_image_block">
+                <div class="new_work_image_title">Image chargée</div>
+                <img class="new_work_image" :src="getNewImageUrl" alt="">
             </div>                        
         </div>
 
@@ -67,10 +67,10 @@ import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
     name : 'EditPresentationForm',
     computed: {
-        ...mapGetters('presentation', ['getPresentation'])
+        ...mapGetters('presentation', ['getPresentation', 'getNewImageUrl']),
     },
     methods: {
-        ...mapMutations('presentation', ['setTitleValue', 'setParagraphFieldValue']),
+        ...mapMutations('presentation', ['setTitleValue', 'setParagraphFieldValue', 'setNewImageValue']),
         ...mapActions('presentation', ['actionUpdatePresentation',  'actionDeleteParagraph', 'actionAddNewParagraph']),
         // sur le changement d'un des champs on modifie le state
         onChangeField(event) {
@@ -78,8 +78,67 @@ export default {
                 this.setTitleValue({ field: event.target.name, value: event.target.value });
             } else if (event.target.name == 'content') {
                 this.setParagraphFieldValue({ field: event.target.name, value: event.target.value, paragraphId: event.target.id })
-            }
-                   
+            } else if(event.target.name === 'file') {
+
+                // traitemant de l'image
+                let reader = new FileReader();
+                // création d'un canvas pour dessiner l'image redimensionnée
+                const canvas = document.createElement('canvas');
+                // récupération du fichier dans l'input
+                const file = event.target.files[0];
+
+                // Ajoutez un événement pour détecter la fin de la lecture du fichier
+                reader.addEventListener('load', () => {
+                    // création d'une nouvelle image
+                    const img = new Image();
+                    img.crossOrigin = "Anonymous";
+                    // sur le chargement de cette image
+                    img.addEventListener('load', () => {
+
+                        // récupération des dimensions de l'image
+                        const width = img.width;
+                        const height = img.height;
+
+                        // récupération de valeurs de redimensionnement
+                        let newWidth = width;
+                        let newHeight = height;
+                        if (width > 500) {
+                            newWidth = 500;
+                            newHeight = Math.round(height * (newWidth / width));
+                        }
+                        
+                        canvas.width = newWidth;
+                        canvas.height = newHeight;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, newWidth, newHeight);
+
+                        // récupération de l'URL de l'image redimensionnée
+                        const dataUrl = canvas.toDataURL('image/jpeg');
+
+                        // envoie de l'url dans le state newImageUrl
+                        this.setNewImageValue({ field: 'newImageUrl', value: dataUrl });
+                    });  
+
+                    // définition de la source de l'image sur l'URL du fichier sélectionné
+                    img.src = reader.result;
+            //!!!!!! TODO cette partie ne fonctionne pas j'ai une image soit toue noire soit toute grise !!!!!
+                    // Convertir le canvas en blob
+                    canvas.toBlob((blob) => {
+                        // Créer un objet File à partir du blob
+                        const newFile = new File([blob], file.name, {
+                        type: file.type,
+                        lastModified: file.lastModified
+                        });
+                        console.log(newFile);
+            //!!!!!! TODO cette partie ne fonctionne pas du coup j'envoie le file de l'input pour le moment !!!!!
+                        // envoie dans le state du file
+                        this.setNewImageValue({ field: 'newImage', value: file });
+                    }, file.type, 1);
+                });
+                // Commencez à lire le fichier sélectionné
+                console.log(event.target.files[0]);
+                reader.readAsDataURL(event.target.files[0]);      
+            };           
         },
         // sur la soumimssion du formulaire on lance la action de modification de la présentation
         onSubmit(event) {

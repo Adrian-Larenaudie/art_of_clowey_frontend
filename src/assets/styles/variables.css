@@ -1,6 +1,8 @@
 :root {
 
     /* ----- colors ----- */
+    --main-background-color: #fffffe;
+    
     --svg-main-color: #002631;
     --border-main-color: lightgrey;
     --application-border-color: #006e8fb2;
